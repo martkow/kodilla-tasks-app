@@ -20,4 +20,22 @@ public class Calculator {
 
         return (double)sum / grades.size();
     }
+
+    public static boolean validateIsPrime(int number) {
+        if (number <= 1) {
+            return false;
+        } else if (number == 2) {
+            return true;
+        } else if (number % 2 == 0) {
+            return false;
+        }
+
+        for (int i = 3; i <= Math.sqrt(number); i = i+2) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

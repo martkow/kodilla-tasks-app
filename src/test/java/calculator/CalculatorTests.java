@@ -64,4 +64,70 @@ public class CalculatorTests {
         // Then
         Assertions.assertEquals(6.5, result);
     }
+
+    @DisplayName("Test case for validateIsPrime method: -1")
+    @Test
+    void testCaseForValidateIsPrimeForMinusOne() {
+        // Given
+        int number = -1;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertFalse(result);
+    }
+
+    @DisplayName("Test case for validateIsPrime method: 1")
+    @Test
+    void testCaseForValidateIsPrimeForOne() {
+        // Given
+        int number = 1;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertFalse(result);
+    }
+
+    @DisplayName("Test case for validateIsPrime method: 2")
+    @Test
+    void testCaseForValidateIsPrimeForTwo() {
+        // Given
+        int number = 2;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertTrue(result);
+    }
+
+    @DisplayName("Test case for validateIsPrime method: 3")
+    @Test
+    void testCaseForValidateIsPrimeForThree() {
+        // Given
+        int number = 3;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertTrue(result);
+    }
+
+    @DisplayName("Test case for validateIsPrime method: 4")
+    @Test
+    void testCaseForValidateIsPrimeForFour() {
+        // Given
+        int number = 4;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertFalse(result);
+    }
+
+    @DisplayName("Test case for validateIsPrime method: 131")
+    @Test
+    void testCaseForValidateIsPrimeForThirteen() {
+        // Given
+        int number = 13;
+        // When
+        boolean result = Calculator.validateIsPrime(number);
+        // Then
+        Assertions.assertTrue(result);
+    }
 }
