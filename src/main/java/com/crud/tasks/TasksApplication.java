@@ -10,6 +10,30 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ The Attributes of the Application:
+ <ul>
+ 	<li>Database used: MySql</li>
+ 	<li>Libraries used:
+ 		<ul>
+ 			<li>Spring Boot</li>
+ 			<li>Lombok</li>
+    		<li>JUnit 5</li>
+ 			<li>MySQL Connector/J </li>
+ 			<li>Springfox</li>
+ 		</ul>
+ 	</li>
+ 	<li>HTTP methods used:
+ 		<ul>
+ 			<li>GET</li>
+ 			<li>POST</li>
+ 			<li>PUT</li>
+ 			<li>DELETE</li>
+ 		</ul>
+ 	</li>
+ </ul>
+ */
+
 @SpringBootApplication
 @EnableSwagger2 // Annotation is used to enable the Swagger2 for your Spring Boot application
 public class TasksApplication {
