@@ -9,13 +9,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/tasks")
@@ -33,10 +31,10 @@ public class TaskController {
             @ApiResponse(responseCode = "200",
             description = "Tasks received successfully")
     })
-    public List<TaskDto> getTasks() {
+    public ResponseEntity<List<TaskDto>> getTasks() {
         List<Task> tasks = dbService.getAllTasks();
 
-        return taskMapper.mapToTaskDtoList(tasks);
+        return ResponseEntity.ok(taskMapper.mapToTaskDtoList(tasks));
     }
 
     @GetMapping(value = "/{taskId}")
@@ -49,31 +47,54 @@ public class TaskController {
             @ApiResponse(responseCode = "400",
                     description = "Bad request - Task does not exist")
     })
-    public ResponseEntity<TaskDto> getTask(@PathVariable Long taskId) {
-        try {
-            return new ResponseEntity<>(taskMapper.mapToTaskDto(dbService.getTask(taskId)), HttpStatus.OK);
-        } catch (TaskNotFoundException tnfe) {
-            return new ResponseEntity<>(new TaskDto(0L, "There is no task with id equal to: " + taskId, ""), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<TaskDto> getTask(@PathVariable Long taskId) throws TaskNotFoundException {
+        return ResponseEntity.ok(taskMapper.mapToTaskDto(dbService.getTask(taskId)));
+//        return new ResponseEntity<>(taskMapper.mapToTaskDto(dbService.getTask(taskId)), HttpStatus.OK);
     }
+
 //    @GetMapping(value = "/task")
 //    public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
 //        return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(TaskNotFoundException::new));
 //    }
 
-    @DeleteMapping
-    public void deleteTask(Long taskId) {
-
+    @DeleteMapping(value = "/{taskId}")
+    @Operation(
+            description = "Removing a task by taskId",
+            summary = "Remove a task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK - Task deleted successfully")
+    })
+    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) throws TaskNotFoundException {
+        dbService.deleteTask(taskId);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public TaskDto updateTask(TaskDto taskDto) {
-        return new TaskDto(1L, "Edited test title", "Test content");
+    @Operation(
+            description = "Updating a task",
+            summary = "Update a task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK - Task updated successfully")
+    })
+    public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto taskDto) {
+        Task task = taskMapper.mapToTask(taskDto);
+        Task savedTask = dbService.saveTask(task);
+        return ResponseEntity.ok(taskMapper.mapToTaskDto(savedTask));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createTask(@RequestBody TaskDto taskDto) {
+    @Operation(
+            description = "Creating a task",
+            summary = "Create a task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK - Task created successfully")
+    })
+    public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         dbService.saveTask(task);
+        return ResponseEntity.ok().build();
     }
 }

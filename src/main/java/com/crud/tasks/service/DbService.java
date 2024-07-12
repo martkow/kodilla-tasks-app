@@ -22,7 +22,12 @@ public class DbService {
         return taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
     }
 
-    public void saveTask(final Task task) {
-        taskRepository.save(task);
+    public Task saveTask(final Task task) {
+        return taskRepository.save(task);
+    }
+
+    public void deleteTask(final Long id) throws TaskNotFoundException {
+        taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+        taskRepository.deleteById(id);
     }
 }
