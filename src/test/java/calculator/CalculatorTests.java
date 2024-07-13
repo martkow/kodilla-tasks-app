@@ -130,4 +130,36 @@ public class CalculatorTests {
         // Then
         Assertions.assertTrue(result);
     }
+
+    @DisplayName("Test case for sortList method: empty list")
+    @Test
+    void testCaseForSortListForEmptyList() {
+        // Given
+        List<Integer> list = new ArrayList<>();
+        // When
+        List<Integer> result = Calculator.sortList(list);
+        // Then
+        Assertions.assertEquals(result, list);
+    }
+
+    @DisplayName("Test case for sortList method: list with negative numbers")
+    @Test
+    void testCaseForSortListForListWithNegativeNumbers() {
+        // Given
+        List<Integer> list = new ArrayList<>(List.of(0, 2, -1, 1, -3));
+        // When
+        // Then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.sortList(list));
+    }
+
+    @DisplayName("Test case for sortList method: list containing some equal elements")
+    @Test
+    void testCaseForSortListForListContainingSomeEqualElements() {
+        // Given
+        List<Integer> list = new ArrayList<>(List.of(1, 20, 10, 1, 3, 20, 1));
+        // When
+        List<Integer> result = Calculator.sortList(list);
+        // Then
+        Assertions.assertEquals(result, new ArrayList<>(List.of(1, 1, 1, 3, 10, 20, 20)));
+    }
 }

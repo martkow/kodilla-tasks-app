@@ -1,6 +1,9 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Calculator {
@@ -37,5 +40,25 @@ public class Calculator {
         }
 
         return true;
+    }
+
+    public static List<Integer> sortList(List<Integer> list) throws IllegalArgumentException {
+        if (list.isEmpty()) {
+            return list;
+        }
+        if (list.stream().anyMatch(item -> item < 0)) {
+            throw new IllegalArgumentException("List contains negative elements.");
+        }
+
+        List<Integer> listCopy = new ArrayList<>(list);
+        List<Integer> sortedList = new ArrayList<>();
+
+        while (!listCopy.isEmpty()) {
+            Optional<Integer> min = listCopy.stream().min(Comparator.naturalOrder());
+            sortedList.add(min.get());
+            listCopy.remove(min.get());
+        }
+
+        return sortedList;
     }
 }
