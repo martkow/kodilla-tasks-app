@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @implNote @CrossOrigin("*")<br>
+ * Cross Origin Resource Sharing – CORS<br>
+ * This annotation tells Spring that it can receive requests from external servers (like our simple MAMP-based frontend server) located under other domains and that it should allow this
+*/
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/tasks")
 @Tag(name = "Managing tasks")
