@@ -21,7 +21,7 @@ import java.util.List;
  * This annotation tells Spring that it can receive requests from external servers (like our simple MAMP-based frontend server) located under other domains and that it should allow this
 */
 @CrossOrigin("*")
-@RestController
+@RestController // Annotation most often used when writing the so-called controllers for web applications. Practically identical to the @Component annotation, but it is worth using it for web service controllers.
 @RequestMapping("/v1/tasks")
 @Tag(name = "Managing tasks")
 @RequiredArgsConstructor
