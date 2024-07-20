@@ -29,7 +29,6 @@ public class TaskController {
     private final DbService dbService;
     private final TaskMapper taskMapper;
 
-    @GetMapping
     @Operation(
             description = "Receiving all tasks",
             summary = "Get tasks")
@@ -37,13 +36,13 @@ public class TaskController {
             @ApiResponse(responseCode = "200",
             description = "Tasks received successfully")
     })
+    @GetMapping
     public ResponseEntity<List<TaskDto>> getTasks() {
         List<Task> tasks = dbService.getAllTasks();
 
         return ResponseEntity.ok(taskMapper.mapToTaskDtoList(tasks));
     }
 
-    @GetMapping(value = "/{taskId}")
     @Operation(
             description = "Receiving a task by taskId",
             summary = "Get a task")
@@ -53,6 +52,7 @@ public class TaskController {
             @ApiResponse(responseCode = "400",
                     description = "Bad request - Task does not exist")
     })
+    @GetMapping(value = "/{taskId}")
     public ResponseEntity<TaskDto> getTask(@PathVariable Long taskId) throws TaskNotFoundException {
         return ResponseEntity.ok(taskMapper.mapToTaskDto(dbService.getTask(taskId)));
 //        return new ResponseEntity<>(taskMapper.mapToTaskDto(dbService.getTask(taskId)), HttpStatus.OK);
@@ -63,7 +63,6 @@ public class TaskController {
 //        return taskMapper.mapToTaskDto(dbService.getTask(taskId).orElseThrow(TaskNotFoundException::new));
 //    }
 
-    @DeleteMapping(value = "/{taskId}")
     @Operation(
             description = "Removing a task by taskId",
             summary = "Remove a task")
@@ -71,12 +70,12 @@ public class TaskController {
             @ApiResponse(responseCode = "200",
                     description = "OK - Task deleted successfully")
     })
+    @DeleteMapping(value = "/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) throws TaskNotFoundException {
         dbService.deleteTask(taskId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
     @Operation(
             description = "Updating a task",
             summary = "Update a task")
@@ -84,13 +83,13 @@ public class TaskController {
             @ApiResponse(responseCode = "200",
                     description = "OK - Task updated successfully")
     })
+    @PutMapping
     public ResponseEntity<TaskDto> updateTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         Task savedTask = dbService.saveTask(task);
         return ResponseEntity.ok(taskMapper.mapToTaskDto(savedTask));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             description = "Creating a task",
             summary = "Create a task")
@@ -98,6 +97,7 @@ public class TaskController {
             @ApiResponse(responseCode = "200",
                     description = "OK - Task created successfully")
     })
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         dbService.saveTask(task);
