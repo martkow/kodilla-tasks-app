@@ -1,9 +1,6 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Calculator {
@@ -60,5 +57,29 @@ public class Calculator {
         }
 
         return sortedList;
+    }
+
+    public static List<Integer> sortListBubble(List<Integer> list) throws IllegalArgumentException {
+        if (list.isEmpty()) {
+            return list;
+        }
+        if (list.stream().anyMatch(item -> item < 0)) {
+            throw new IllegalArgumentException("List contains negative elements.");
+        }
+
+        List<Integer> listCopy = new ArrayList<>(list);
+        boolean swapped;
+
+        do {
+            swapped = false;
+            for (int i = 0; i < listCopy.size() - 1; i++) {
+                if (listCopy.get(i) > listCopy.get(i + 1)) {
+                    listCopy.set(i, listCopy.set(i + 1, listCopy.get(i)));
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+
+        return listCopy;
     }
 }
