@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Repository // An annotation used to mark beans responsible for storing data in persistent data sets (e.g. a database).
 public interface TaskRepository extends CrudRepository<Task, Long> {
     List<Task> findAll();
     Optional<Task> findById(Long id);

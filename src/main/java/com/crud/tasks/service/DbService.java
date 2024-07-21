@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // Annotation with the same behavior as @Component, but we apply it to beans that provide some more complex services.
 @RequiredArgsConstructor // Create constructor for all class fields marked as 'final'
 public class DbService {
     private final TaskRepository taskRepository;

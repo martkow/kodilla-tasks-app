@@ -21,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
     		<li>JUnit 5</li>
  			<li>MySQL Connector/J </li>
  			<li>Springfox</li>
+ 			<li>SLF4J</li>
  		</ul>
  	</li>
  	<li>HTTP methods used:
