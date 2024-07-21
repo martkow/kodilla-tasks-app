@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,15 +32,8 @@ public class TrelloController {
             @ApiResponse(responseCode = "200",
                     description = "Boards received successfully")
     })
-    public void getTrelloBoards() {
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-
-        trelloBoards.stream()
-                .filter(trelloBoardDto -> trelloBoardDto.getName() != null && trelloBoardDto.getId() != null)
-                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
-                .forEach(trelloBoardDto -> {
-            System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName() + " " + trelloBoardDto.getLists());
-        });
+    public ResponseEntity<List<TrelloBoardDto>> getTrelloBoards() {
+        return ResponseEntity.ok(trelloClient.getTrelloBoards());
     }
 
     @Operation(
@@ -53,7 +47,7 @@ public class TrelloController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public CreatedTrelloCardDto addTrelloCard(@RequestBody TrelloCardDto cardDto) {
-        return trelloClient.createTrelloCard(cardDto);
+    public ResponseEntity<CreatedTrelloCardDto> addTrelloCard(@RequestBody TrelloCardDto cardDto) {
+        return ResponseEntity.ok(trelloClient.createTrelloCard(cardDto));
     }
 }
