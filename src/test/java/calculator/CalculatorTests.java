@@ -194,4 +194,23 @@ public class CalculatorTests {
         // Then
         Assertions.assertEquals(result, new ArrayList<>(List.of(1, 1, 1, 3, 10, 20, 20)));
     }
+
+    @DisplayName("Test case for convertCharToInteger method: correct data")
+    @Test
+    void testCaseForConvertCharToIntegerMethodForCorrectData() {
+        // Given
+        // When
+        int result = Calculator.convertCharToInteger('7');
+        // Then
+        Assertions.assertEquals(7, result);
+    }
+
+    @DisplayName("Test case for convertCharToInteger method: wrong data")
+    @Test
+    void testCaseForConvertCharToIntegerMethodForWrongData() {
+        // Given
+        // When
+        // Then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.convertCharToInteger('b'));
+    }
 }
