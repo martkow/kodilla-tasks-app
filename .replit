@@ -1,0 +1,10 @@
+modules = ["java-graalvm22.3"]
+run = ["./gradlew", "bootRun"]
+
+[nix]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
