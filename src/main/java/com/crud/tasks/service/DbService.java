@@ -19,7 +19,7 @@ public class DbService {
     }
 
     public Task getTask(final Long id) throws TaskNotFoundException {
-        return taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+        return taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     public Task saveTask(final Task task) {
@@ -27,7 +27,7 @@ public class DbService {
     }
 
     public void deleteTask(final Long id) throws TaskNotFoundException {
-        taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+        taskRepository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
         taskRepository.deleteById(id);
     }
 }
