@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Calculator {
     public static double calculateWeightedAverage(List<Integer> grades, List<Integer> weights) throws IllegalArgumentException{
@@ -83,7 +84,7 @@ public class Calculator {
         return listCopy;
     }
 
-    public static int convertCharToInteger(char c) {
+    public static int convertCharToInteger(char c) throws IllegalArgumentException {
         return switch (c) {
             case '0' -> 0;
             case '1' -> 1;
@@ -97,5 +98,30 @@ public class Calculator {
             case '9' -> 9;
             default -> throw new IllegalArgumentException("Wrong data.");
         };
+    }
+
+    public static int convertStringToInteger(String s) throws IllegalArgumentException {
+        if (s.isEmpty()) {
+            throw new IllegalArgumentException("Empty String.");
+        }
+
+        int number = 0;
+        int multiplier = 1;
+        int startIndex = 0;
+
+        if (s.charAt(0) == '-') {
+            multiplier = -1;
+            startIndex = 1;
+        }
+
+//        for (int i = s.length() - 1; i >= startIndex; i--) {
+//            number = number + convertCharToInteger(s.charAt(i)) * (int)Math.pow(10, s.length() - i - 1);
+//        }
+
+        number = IntStream.range(0, s.length() - startIndex)
+                .map(i -> convertCharToInteger(s.charAt(s.length() - 1 - i)) * (int) Math.pow(10, i))
+                .sum();
+
+        return number * multiplier;
     }
 }

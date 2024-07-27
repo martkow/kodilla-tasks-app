@@ -213,4 +213,23 @@ public class CalculatorTests {
         // Then
         Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.convertCharToInteger('b'));
     }
+
+    @DisplayName("Test case for convertStringToInteger method: correct data")
+    @Test
+    void testCaseForConvertStringToIntegerMethodForCorrectData() {
+        // Given
+        // When
+        int result = Calculator.convertStringToInteger("-7012");
+        // Then
+        Assertions.assertEquals(-7012, result);
+    }
+
+    @DisplayName("Test case for convertCharToInteger method: wrong data")
+    @Test
+    void testCaseForConvertStringToIntegerMethodForWrongData() {
+        // Given
+        // When
+        // Then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.convertStringToInteger("70b12"));
+    }
 }
