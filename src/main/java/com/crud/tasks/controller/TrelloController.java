@@ -3,7 +3,7 @@ package com.crud.tasks.controller;
 import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.trello.client.TrelloClient;
+import com.crud.tasks.service.TrelloService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrelloController {
 
-    private final TrelloClient trelloClient;
+    private final TrelloService trelloService;
 
     @Operation(
             description = "Receiving all trello boards",
@@ -43,7 +43,7 @@ public class TrelloController {
     @GetMapping("/boards")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<TrelloBoardDto>> getTrelloBoards() {
-        return ResponseEntity.ok(trelloClient.getTrelloBoards());
+        return ResponseEntity.ok(trelloService.fetchTrelloBoards());
     }
 
     @Operation(
@@ -62,6 +62,6 @@ public class TrelloController {
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Trello card data to create.", required = true)
             @RequestBody TrelloCardDto cardDto
     ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(trelloClient.createTrelloCard(cardDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(trelloService.createTrelloCard(cardDto));
     }
 }

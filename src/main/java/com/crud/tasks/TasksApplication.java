@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  The Attributes of the Application:
@@ -40,6 +41,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		contact = @Contact(name = "contactName"),
 		license = @License(name = "license")
 		))
+@EnableScheduling // The @EnableScheduling annotation in Spring is used to enable the scheduling of tasks. When you apply this annotation to a Spring configuration class, it allows you to define methods with the @Scheduled annotation that will be executed at specified intervals or times.
 @SpringBootApplication
 public class TasksApplication {
 	public static void main(String[] args) {
@@ -47,3 +49,5 @@ public class TasksApplication {
 		SpringApplication.run(TasksApplication.class, args);
 	}
 }
+
+
