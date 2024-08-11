@@ -124,4 +124,24 @@ public class Calculator {
 
         return number * multiplier;
     }
+
+    public static String convertDecimalToBinary(int number) throws IllegalArgumentException {
+        if (number < 0) {
+            throw new IllegalArgumentException("Number is negative.");
+        }
+
+        if (number == 0) {
+            return String.valueOf(0);
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int temp = number;
+
+        while (temp != 0) {
+            stringBuilder.append(temp % 2);
+            temp = temp / 2;
+        }
+
+        return stringBuilder.reverse().toString();
+    }
 }

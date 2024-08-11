@@ -232,4 +232,14 @@ public class CalculatorTests {
         // Then
         Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.convertStringToInteger("70b12"));
     }
+
+    @DisplayName("Test case for convertDecimalToBinary")
+    @Test
+    void shouldReturnBinaryAsString() {
+        // Given
+        // When
+        String result = Calculator.convertDecimalToBinary(41);
+        // Then
+        Assertions.assertEquals("101001", result);
+    }
 }
