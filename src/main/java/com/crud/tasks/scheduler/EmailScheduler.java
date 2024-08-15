@@ -17,7 +17,7 @@ public class EmailScheduler {
     private final TaskRepository taskRepository;
 
 //  @Scheduled(cron = "0 0 10 * * *") // Create a method that Spring will execute at a specified interval. Let's call it sendInformationEmail(). Remember that methods subjected to an interval should not return anything! This is because Spring would not know what to do with such a return value.
-@Scheduled(fixedDelay = 10000) // Every 10 seconds
+// @Scheduled(fixedDelay = 10000) // Every 10 seconds
     private void sendInformationEmail() {
         long number = taskRepository.count();
         simpleEmailService.sendSimpleMail(
