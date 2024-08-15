@@ -233,13 +233,23 @@ public class CalculatorTests {
         Assertions.assertThrows(IllegalArgumentException.class, () -> Calculator.convertStringToInteger("70b12"));
     }
 
-    @DisplayName("Test case for convertDecimalToBinary")
+    @DisplayName("Test case for convertDecimalToBinaryOrHex")
     @Test
-    void shouldReturnBinaryAsString() {
+    void shouldReturnBinary() {
         // Given
         // When
-        String result = Calculator.convertDecimalToBinary(41);
+        String result = Calculator.convertDecimalToBinaryOrHex(-41, 2);
         // Then
-        Assertions.assertEquals("101001", result);
+        Assertions.assertEquals("-101001", result);
+    }
+
+    @DisplayName("Test case for convertDecimalToBinaryOrHex")
+    @Test
+    void shouldReturnHex() {
+        // Given
+        // When
+        String result = Calculator.convertDecimalToBinaryOrHex(-923, 16);
+        // Then
+        Assertions.assertEquals("-39b", result);
     }
 }

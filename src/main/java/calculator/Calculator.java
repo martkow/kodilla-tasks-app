@@ -125,9 +125,9 @@ public class Calculator {
         return number * multiplier;
     }
 
-    public static String convertDecimalToBinary(int number) throws IllegalArgumentException {
-        if (number < 0) {
-            throw new IllegalArgumentException("Number is negative.");
+    public static String convertDecimalToBinaryOrHex(int number, int system) throws IllegalArgumentException {
+        if (system != 2 && system != 16) {
+            throw new IllegalArgumentException("Incorrect number system.");
         }
 
         if (number == 0) {
@@ -135,13 +135,13 @@ public class Calculator {
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        int temp = number;
+        int temp = Math.abs(number);
 
         while (temp != 0) {
-            stringBuilder.append(temp % 2);
-            temp = temp / 2;
+            stringBuilder.append(Character.forDigit(temp % system, system));
+            temp = temp / system;
         }
 
-        return stringBuilder.reverse().toString();
+        return (number < 0 ? "-" : "") + stringBuilder.reverse().toString();
     }
 }
