@@ -42,6 +42,9 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+// Enable TestLogger
+	testImplementation group: 'uk.org.lidalia', name: 'slf4j-test', version: '1.2.0'
 }
 
 tasks.named('test') {

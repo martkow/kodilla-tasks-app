@@ -23,7 +23,8 @@ public class SimpleEmailService {
             javaMailSender.send(createSimpleMailMessage(mail));
             log.info("Email has been sent.");
         } catch (MailException me) {
-            log.error("Failed to process email sending: {}", me.getMessage(), me);
+            log.error("Failed to process email sending: " + me.getMessage());
+            log.error("Exception stack trace", me);
         }
     }
 
