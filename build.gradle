@@ -25,13 +25,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.0.0'
-
 // It is a starter module in Spring Boot that simplifies the integration of email sending functionalities into a Spring Boot application.
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-
+// It is a subproject of Spring Boot that provides production-ready features to help monitor and manage your Spring Boot application.
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+// Lombok Getters, Setters,...
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
