@@ -4,6 +4,9 @@ import com.crud.tasks.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,9 +15,9 @@ import java.util.Comparator;
 import java.util.List;
 
 @DisplayName("Tests for TrelloMapper class")
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TrelloMapperTests {
-    @Autowired
+    @InjectMocks
     private TrelloMapper trelloMapper;
     private List<TrelloListDto> trelloListDtos = new ArrayList<>(List.of(
             new TrelloListDto("1", "Test list 1", false),
