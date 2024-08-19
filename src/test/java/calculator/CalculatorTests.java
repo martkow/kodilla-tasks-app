@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @DisplayName("Tests for Calculator class")
@@ -251,5 +252,27 @@ public class CalculatorTests {
         String result = Calculator.convertDecimalToBinaryOrHex(-923, 16);
         // Then
         Assertions.assertEquals("-39b", result);
+    }
+
+    @DisplayName("Test case for transposeMatrix method")
+    @Test
+    void shouldReturnTransposition() {
+        // Given
+        int[][] matrix = new int[][] {
+                {1,2,3},  // 1 4
+                {4,5,6}   // 2 5
+        };                // 3 6
+        // When
+        int[][] result = Calculator.transposeMatrix(matrix);
+        // Then
+        Assertions.assertEquals(3, result.length);
+        Assertions.assertEquals(2, result[0].length);
+
+        Assertions.assertEquals(1, result[0][0]);
+        Assertions.assertEquals(4, result[0][1]);
+        Assertions.assertEquals(2, result[1][0]);
+        Assertions.assertEquals(5, result[1][1]);
+        Assertions.assertEquals(3, result[2][0]);
+        Assertions.assertEquals(6, result[2][1]);
     }
 }
