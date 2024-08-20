@@ -10,6 +10,6 @@ public class Mail {
     @NonNull
     private String to;
     private String subject;
-    private String text;
+    private String message;
     private String toCC;
 }

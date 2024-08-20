@@ -33,7 +33,7 @@ public class TrelloService {
                                 Mail.builder()
                                         .to(adminConfig.getAdminMail())
                                         .subject(SUBJECT)
-                                        .text("New card: " + trelloCardDto.getName() + " has been created on your Trello account.")
+                                        .message("New card: " + trelloCardDto.getName() + " has been created on your Trello account.")
                                         .build()
                         ));
 
