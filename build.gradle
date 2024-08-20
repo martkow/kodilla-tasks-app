@@ -31,6 +31,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 // It is a subproject of Spring Boot that provides production-ready features to help monitor and manage your Spring Boot application.
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+// Thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+
 // Lombok Getters, Setters,...
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
