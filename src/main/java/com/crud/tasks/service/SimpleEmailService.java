@@ -40,8 +40,9 @@ public class SimpleEmailService {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getTo());
+            messageHelper.setFrom(mail.getFrom());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage(), mail.getPreviewMessage()), true);
         };
     }
 

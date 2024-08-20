@@ -43,7 +43,7 @@ public class MailCreatorService {
      * @param message
      * @return String
      */
-    public String buildTrelloCardEmail(String message) {
+    public String buildTrelloCardEmail(String message, String previewMessage) {
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("tasks_url", "http://localhost:8080/index.html");
@@ -53,6 +53,7 @@ public class MailCreatorService {
         context.setVariable("company_email", companyConfig.getCompanyEmail());
         context.setVariable("company_phone", companyConfig.getCompanyPhone());
         context.setVariable("company_goal", companyConfig.getCompanyGoal());
+        context.setVariable("preview_message", previewMessage);
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
 }
