@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.domain.EmailType;
 import com.crud.tasks.domain.Mail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +43,9 @@ public class SimpleEmailService {
             messageHelper.setTo(mail.getTo());
             messageHelper.setFrom(mail.getFrom());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage(), mail.getPreviewMessage()), true);
+            messageHelper.setText(mail.getType().equals(EmailType.NEW_CARD)
+                    ? mailCreatorService.buildTrelloCardEmail(mail.getMessage(), mail.getPreviewMessage())
+                    : mailCreatorService.buildNoReplyEmail(mail.getMessage(), mail.getPreviewMessage()), true);
         };
     }
 

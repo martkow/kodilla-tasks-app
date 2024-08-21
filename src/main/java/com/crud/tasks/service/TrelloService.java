@@ -2,10 +2,7 @@ package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.config.CompanyConfig;
-import com.crud.tasks.domain.CreatedTrelloCardDto;
-import com.crud.tasks.domain.Mail;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloCardDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.trello.client.TrelloClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TrelloService {
     private static final String SUBJECT = "Tasks: New Trello card.";
+    private static final String PREFIX = "New card: ";
+    private static final String SUFFIX = "...";
+    private static final String SUFFIX2 = " has been created on your Trello account.";
     private final TrelloClient trelloClient;
     private final SimpleEmailService simpleEmailService;
     private final AdminConfig adminConfig;
@@ -33,11 +33,12 @@ public class TrelloService {
                 .ifPresent(nc ->
                         simpleEmailService.sendSimpleMail(
                                 Mail.builder()
+                                        .type(EmailType.NEW_CARD)
                                         .to(adminConfig.getAdminMail())
                                         .from(companyConfig.getCompanyEmail())
                                         .subject(SUBJECT)
-                                        .previewMessage("New Trello card...")
-                                        .message("New card: " + trelloCardDto.getName() + " has been created on your Trello account.")
+                                        .previewMessage(PREFIX + trelloCardDto.getName() + SUFFIX)
+                                        .message(PREFIX + trelloCardDto.getName() + SUFFIX2)
                                         .build()
                         ));
 

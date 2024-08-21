@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * To ensure our template works seamlessly with the Thymeleaf library, we need to prepare two essential components:<br><br>
  * Template Engine – Provided by the Thymeleaf library, which is already available as a bean by default. It allows for the interpretation of the values set by us in the template as variables.<br><br>
@@ -44,16 +47,35 @@ public class MailCreatorService {
      * @return String
      */
     public String buildTrelloCardEmail(String message, String previewMessage) {
+        List<String> functionality = new ArrayList<>();
+        functionality.add("You can manage your tasks");
+        functionality.add("Provides connection with Trello Account");
+        functionality.add("Application allows sending tasks to Trello");
+
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("tasks_url", "http://localhost:8080/index.html");
         context.setVariable("button", "Visit website");
-        context.setVariable("admin_name", adminConfig.getAdminName());
-        context.setVariable("company_name", companyConfig.getCompanyName());
-        context.setVariable("company_email", companyConfig.getCompanyEmail());
-        context.setVariable("company_phone", companyConfig.getCompanyPhone());
-        context.setVariable("company_goal", companyConfig.getCompanyGoal());
+        context.setVariable("admin_config", adminConfig);
+        context.setVariable("company_config", companyConfig);
         context.setVariable("preview_message", previewMessage);
+        context.setVariable("show_button", false);
+        context.setVariable("is_friend", true);
+        context.setVariable("application_functionality", functionality);
         return templateEngine.process("mail/created-trello-card-mail", context);
+    }
+
+    public String buildNoReplyEmail(String message, String previewMessage) {
+        Context context = new Context();
+        context.setVariable("preview_message", previewMessage);
+        context.setVariable("welcome_message", "Your statistics");
+        context.setVariable("message", message);
+        context.setVariable("show_button", true);
+        context.setVariable("button", "Visit website");
+        context.setVariable("tasks_url", "http://localhost:8080/index.html");
+        context.setVariable("goodbye_message", "Do not reply to this e-mail");
+        context.setVariable("company_config", companyConfig);
+
+        return templateEngine.process("mail/no-reply-mail", context);
     }
 }

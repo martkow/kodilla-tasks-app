@@ -11,6 +11,8 @@ public class CompanyConfig {
     private String companyName;
     @Value("${info.company.email}")
     private String companyEmail;
+    @Value("${info.company.noreply.email}")
+    private String companyNoReplyEmail;
     @Value("${info.company.phone}")
     private String companyPhone;
     @Value("${info.company.goal}")
